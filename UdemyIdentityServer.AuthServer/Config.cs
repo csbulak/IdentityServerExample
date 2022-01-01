@@ -42,9 +42,7 @@ namespace UdemyIdentityServer.AuthServer
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes = new List<string>()
                     {
-                        "api1.read",
-                        "api2.write",
-                        "api2.update"
+                        "api1.read"
                     }
                 },
                 new Client()
