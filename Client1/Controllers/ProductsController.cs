@@ -1,8 +1,14 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Client1.Models;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace Client1.Controllers
 {
@@ -46,6 +52,9 @@ namespace Client1.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
+
+                var products = JsonConvert.DeserializeObject<List<Product>>(content);
+                return View(products);
             }
             else
             {
