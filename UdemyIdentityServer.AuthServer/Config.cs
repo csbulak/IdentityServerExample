@@ -57,6 +57,7 @@ namespace UdemyIdentityServer.AuthServer
                     AllowedScopes = new List<string>()
                     {
                         "api1.read",
+                        "api1.update",
                         "api2.write",
                         "api2.update"
                     }

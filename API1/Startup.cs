@@ -33,6 +33,19 @@ namespace API1
                     opt.Authority = "https://localhost:5001"; //Token'ý kim daðýtýyor?
                     opt.Audience = "resource_api1";
                 });
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("ReadProduct", policy =>
+                {
+                    policy.RequireClaim("scope", "api1.read");
+                });
+                opt.AddPolicy("UpdateOrCreate", policy =>
+                {
+                    policy.RequireClaim("scope", new[] { "api1.update", "api1.create" });
+                });
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
