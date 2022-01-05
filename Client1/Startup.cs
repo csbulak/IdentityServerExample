@@ -23,6 +23,21 @@ namespace Client1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultScheme = "Cookies";
+                opt.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie("Cookies")
+                .AddOpenIdConnect("oidc", opt =>
+                {
+                    opt.SignInScheme = "Cookies";
+                    opt.Authority = "https://localhost:5001";
+                    opt.ClientId = "Client1-Mvc";
+                    opt.ClientSecret = "secret";
+                    opt.ResponseType = "code id_token";
+                });
+
             services.AddControllersWithViews();
         }
 
