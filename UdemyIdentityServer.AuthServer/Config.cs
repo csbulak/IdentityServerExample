@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 using IdentityServer4.Models;
+using IdentityServer4.Test;
 
 namespace UdemyIdentityServer.AuthServer
 {
@@ -74,6 +77,44 @@ namespace UdemyIdentityServer.AuthServer
                         "api1.update",
                         "api2.write",
                         "api2.update"
+                    }
+                }
+            };
+        }
+
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>()
+            {
+                new IdentityResources.OpenId(), // Token İçinde Kullanıcının ID'si => subID
+                new IdentityResources.Profile(), // Kullanıcı Hakkında Claim
+            };
+        }
+
+        public static IEnumerable<TestUser> GetUsers()
+        {
+            return new List<TestUser>()
+            {
+                new TestUser()
+                {
+                    SubjectId = Guid.NewGuid().ToString("N"),
+                    Username = "cemalbulak",
+                    Password = "123",
+                    Claims = new List<Claim>()
+                    {
+                        new Claim("given_name", "Cemal"),
+                        new Claim("family_name", "Bulak")
+                    }
+                },
+                new TestUser()
+                {
+                    SubjectId = Guid.NewGuid().ToString("N"),
+                    Username = "goktugbulak",
+                    Password = "123",
+                    Claims = new List<Claim>()
+                    {
+                        new Claim("given_name", "Göktuğ"),
+                        new Claim("family_name", "Bulak")
                     }
                 }
             };
