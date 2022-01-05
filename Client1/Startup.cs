@@ -36,6 +36,7 @@ namespace Client1
                     opt.ClientId = "Client1-Mvc";
                     opt.ClientSecret = "secret";
                     opt.ResponseType = "code id_token";
+                    opt.GetClaimsFromUserInfoEndpoint = true; // UserInfo Claims
                 });
 
             services.AddControllersWithViews();
