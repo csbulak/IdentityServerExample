@@ -97,7 +97,7 @@ namespace UdemyIdentityServer.AuthServer
             {
                 new TestUser()
                 {
-                    SubjectId = Guid.NewGuid().ToString("N"),
+                    SubjectId = "1",
                     Username = "cemalbulak",
                     Password = "123",
                     Claims = new List<Claim>()
@@ -108,7 +108,7 @@ namespace UdemyIdentityServer.AuthServer
                 },
                 new TestUser()
                 {
-                    SubjectId = Guid.NewGuid().ToString("N"),
+                    SubjectId = "2",
                     Username = "goktugbulak",
                     Password = "123",
                     Claims = new List<Claim>()
