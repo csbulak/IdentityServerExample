@@ -37,6 +37,7 @@ namespace Client1
                     opt.ClientSecret = "secret";
                     opt.ResponseType = "code id_token";
                     opt.GetClaimsFromUserInfoEndpoint = true; // UserInfo Claims
+                    opt.SaveTokens = true; //Tokenlarý alýr.
                 });
 
             services.AddControllersWithViews();
