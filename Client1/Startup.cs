@@ -38,6 +38,7 @@ namespace Client1
                     opt.ResponseType = "code id_token";
                     opt.GetClaimsFromUserInfoEndpoint = true; // UserInfo Claims
                     opt.SaveTokens = true; //Tokenlarý alýr.
+                    opt.Scope.Add("api1.read");
                 });
 
             services.AddControllersWithViews();
