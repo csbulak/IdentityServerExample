@@ -83,6 +83,7 @@ namespace UdemyIdentityServer.AuthServer
                 new Client()
                 {
                     ClientId = "Client1-Mvc",
+                    RequirePkce = false,
                     ClientName = "Client 1 Mvc App",
                     ClientSecrets = new List<Secret>()
                     {
@@ -91,7 +92,7 @@ namespace UdemyIdentityServer.AuthServer
                     AllowedGrantTypes = GrantTypes.Hybrid,
                     RedirectUris = new List<string>()
                     {
-                        "https://localhost:5006/sign-oidc"
+                        "https://localhost:5006/signin-oidc"
                     },
                     AllowedScopes =
                     {
