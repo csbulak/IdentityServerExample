@@ -9,6 +9,7 @@ namespace Client1.Controllers
         // GET
         public IActionResult Index()
         {
+            
             return View();
         }
     }

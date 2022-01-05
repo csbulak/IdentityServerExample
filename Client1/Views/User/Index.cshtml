@@ -1,5 +1,45 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Authentication
+@{
     ViewData["Title"] = "Index";
 }
 
 <h3>Bu sayfayı sadece üye olan kullanıcılar görebilir.</h3>
+
+<h3>Claim Verileri</h3>
+
+<table class="table table-bordered table-dark table-hover">
+    <thead>
+        <tr>
+            <th>Claim Type</th>
+            <th>Claim Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in User.Claims)
+        {
+            <tr>
+                <td>@item.Type</td>
+                <td>@item.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Auth Verileri</h3>
+<table class="table table-bordered table-dark table-hover">
+    <thead>
+    <tr>
+        <th>Auth Key</th>
+        <th>Auth Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var (key, value) in (await Context.AuthenticateAsync()).Properties?.Items!)
+    {
+        <tr>
+            <td>@key</td>
+            <td>@value</td>
+        </tr>
+    }
+    </tbody>
+</table>
