@@ -15,7 +15,7 @@ namespace Client1.Controllers
             return View();
         }
 
-        public async Task<RedirectToActionResult> LogOut()
+        public async Task LogOut()
         {
             await HttpContext.SignOutAsync("Cookies");
             await HttpContext.SignOutAsync("oidc");
