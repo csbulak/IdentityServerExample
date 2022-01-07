@@ -94,6 +94,10 @@ namespace UdemyIdentityServer.AuthServer
                     {
                         "https://localhost:5006/signin-oidc"
                     },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:5006/signout-callback-oidc"
+                    },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
@@ -101,10 +105,11 @@ namespace UdemyIdentityServer.AuthServer
                         "api1.read",
                         IdentityServerConstants.StandardScopes.OfflineAccess
                     },
-                    AccessTokenLifetime = DateTime.Now.AddHours(2).Second,
+                    AccessTokenLifetime = 2*60*60,
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.ReUse,
-                    AbsoluteRefreshTokenLifetime = DateTime.Now.AddDays(60).Second
+                    RefreshTokenExpiration = TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime = (int)(DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds
                 }
             };
         }
