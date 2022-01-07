@@ -96,10 +96,15 @@ namespace UdemyIdentityServer.AuthServer
                     },
                     AllowedScopes =
                     {
-                        IdentityServerConstants.StandardScopes.OpenId, 
+                        IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "api1.read"
-                    }
+                        "api1.read",
+                        IdentityServerConstants.StandardScopes.OfflineAccess
+                    },
+                    AccessTokenLifetime = DateTime.Now.AddHours(2).Second,
+                    AllowOfflineAccess = true,
+                    RefreshTokenUsage = TokenUsage.ReUse,
+                    AbsoluteRefreshTokenLifetime = DateTime.Now.AddDays(60).Second
                 }
             };
         }

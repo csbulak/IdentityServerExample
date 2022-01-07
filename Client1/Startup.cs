@@ -39,6 +39,7 @@ namespace Client1
                     opt.GetClaimsFromUserInfoEndpoint = true; // UserInfo Claims
                     opt.SaveTokens = true; //Tokenlarý alýr.
                     opt.Scope.Add("api1.read");
+                    opt.Scope.Add("offline_access");
                 });
 
             services.AddControllersWithViews();
