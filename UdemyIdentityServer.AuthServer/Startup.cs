@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UdemyIdentityServer.AuthServer.Models;
 using UdemyIdentityServer.AuthServer.Repository;
+using UdemyIdentityServer.AuthServer.Services;
 
 namespace UdemyIdentityServer.AuthServer
 {
@@ -38,8 +39,9 @@ namespace UdemyIdentityServer.AuthServer
                 .AddInMemoryApiScopes(Config.GetApiScopes())
                 .AddInMemoryClients(Config.GetClients())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                .AddTestUsers(Config.GetUsers().ToList())
-                .AddDeveloperSigningCredential();
+                //.AddTestUsers(Config.GetUsers().ToList())
+                .AddDeveloperSigningCredential()
+                .AddProfileService<CustomProfileServices>();
 
             services.AddControllersWithViews();
         }

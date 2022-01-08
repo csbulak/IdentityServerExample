@@ -105,7 +105,8 @@ namespace UdemyIdentityServer.AuthServer
                         "api1.read",
                         IdentityServerConstants.StandardScopes.OfflineAccess,
                         "CountryAndCity",
-                        "Roles"
+                        "Roles",
+                        IdentityServerConstants.StandardScopes.Email
                     },
                     AccessTokenLifetime = 2*60*60,
                     AllowOfflineAccess = true,
@@ -155,6 +156,7 @@ namespace UdemyIdentityServer.AuthServer
         {
             return new List<IdentityResource>()
             {
+                new IdentityResources.Email(),
                 new IdentityResources.OpenId(), // Token İçinde Kullanıcının ID'si => subID
                 new IdentityResources.Profile(), // Kullanıcı Hakkında Claim
                 new IdentityResource()

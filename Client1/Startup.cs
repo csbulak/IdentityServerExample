@@ -51,6 +51,7 @@ namespace Client1
                     opt.Scope.Add("offline_access");
                     opt.Scope.Add("CountryAndCity");
                     opt.Scope.Add("Roles");
+                    opt.Scope.Add("email");
 
                     opt.ClaimActions.MapUniqueJsonKey("country", "country");
                     opt.ClaimActions.MapUniqueJsonKey("city", "city");
@@ -58,7 +59,8 @@ namespace Client1
 
                     opt.TokenValidationParameters = new TokenValidationParameters()
                     {
-                        RoleClaimType = "role"
+                        RoleClaimType = "role",
+                        NameClaimType = "name"
                     };
                 });
 
