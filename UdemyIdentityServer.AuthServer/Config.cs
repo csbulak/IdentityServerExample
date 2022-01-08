@@ -103,7 +103,8 @@ namespace UdemyIdentityServer.AuthServer
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "api1.read",
-                        IdentityServerConstants.StandardScopes.OfflineAccess
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        "CountryAndCity"
                     },
                     AccessTokenLifetime = 2*60*60,
                     AllowOfflineAccess = true,
@@ -121,6 +122,17 @@ namespace UdemyIdentityServer.AuthServer
             {
                 new IdentityResources.OpenId(), // Token İçinde Kullanıcının ID'si => subID
                 new IdentityResources.Profile(), // Kullanıcı Hakkında Claim
+                new IdentityResource()
+                {
+                    Name = "CountryAndCity",
+                    DisplayName = "Country and City",
+                    Description = "Kullanıcının ülke ve şehir bilgisi",
+                    UserClaims = new List<string>()
+                    {
+                        "country",
+                        "city"
+                    }
+                }
             };
         }
 
@@ -136,7 +148,9 @@ namespace UdemyIdentityServer.AuthServer
                     Claims = new List<Claim>()
                     {
                         new Claim("given_name", "Cemal"),
-                        new Claim("family_name", "Bulak")
+                        new Claim("family_name", "Bulak"),
+                        new Claim("country","Türkiye"),
+                        new Claim("city","Kocaeli")
                     }
                 },
                 new TestUser()
@@ -147,7 +161,9 @@ namespace UdemyIdentityServer.AuthServer
                     Claims = new List<Claim>()
                     {
                         new Claim("given_name", "Göktuğ"),
-                        new Claim("family_name", "Bulak")
+                        new Claim("family_name", "Bulak"),
+                        new Claim("country","Türkiye"),
+                        new Claim("city","İstanbul")
                     }
                 }
             };
