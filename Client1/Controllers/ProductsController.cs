@@ -6,12 +6,16 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Client1.Models;
 using IdentityModel.Client;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Newtonsoft.Json;
 
 namespace Client1.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -25,27 +29,9 @@ namespace Client1.Controllers
         {
             HttpClient client = new HttpClient();
 
-            var discovery = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
-            if (discovery.IsError)
-            {
-                //loglama yap
-            }
+            var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
 
-            var token = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest()
-            {
-                ClientId = _configuration["Client:ClientId"],
-                ClientSecret = _configuration["Client:ClientSecret"],
-                Address = discovery.TokenEndpoint
-            });
-
-            if (token.IsError)
-            {
-                //loglama yap
-            }
-
-            //https://localhost:5016
-
-            client.SetBearerToken(token.AccessToken);
+            client.SetBearerToken(accessToken);
 
             var response = await client.GetAsync("https://localhost:5016/api/Products/GetProducts");
 
