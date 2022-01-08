@@ -104,7 +104,8 @@ namespace UdemyIdentityServer.AuthServer
                         IdentityServerConstants.StandardScopes.Profile,
                         "api1.read",
                         IdentityServerConstants.StandardScopes.OfflineAccess,
-                        "CountryAndCity"
+                        "CountryAndCity",
+                        "Roles"
                     },
                     AccessTokenLifetime = 2*60*60,
                     AllowOfflineAccess = true,
@@ -132,6 +133,16 @@ namespace UdemyIdentityServer.AuthServer
                         "country",
                         "city"
                     }
+                },
+                new IdentityResource()
+                {
+                    Name = "Roles",
+                    DisplayName = "Roles",
+                    Description = "Kullanıcı Rolleri",
+                    UserClaims = new List<string>()
+                    {
+                        "role"
+                    }
                 }
             };
         }
@@ -150,7 +161,8 @@ namespace UdemyIdentityServer.AuthServer
                         new Claim("given_name", "Cemal"),
                         new Claim("family_name", "Bulak"),
                         new Claim("country","Türkiye"),
-                        new Claim("city","Kocaeli")
+                        new Claim("city","Kocaeli"),
+                        new Claim("role","admin")
                     }
                 },
                 new TestUser()
@@ -163,7 +175,8 @@ namespace UdemyIdentityServer.AuthServer
                         new Claim("given_name", "Göktuğ"),
                         new Claim("family_name", "Bulak"),
                         new Claim("country","Türkiye"),
-                        new Claim("city","İstanbul")
+                        new Claim("city","İstanbul"),
+                        new Claim("role","customer")
                     }
                 }
             };

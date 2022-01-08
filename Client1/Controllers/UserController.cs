@@ -95,5 +95,17 @@ namespace Client1.Controllers
 
             return RedirectToAction("Index");
         }
+        
+        [Authorize(Roles = "admin")]
+        public IActionResult AdminAction()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "customer, admin")]
+        public IActionResult CustomerAction()
+        {
+            return View();
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Client1
 {
@@ -42,9 +43,16 @@ namespace Client1
                     opt.Scope.Add("api1.read");
                     opt.Scope.Add("offline_access");
                     opt.Scope.Add("CountryAndCity");
+                    opt.Scope.Add("Roles");
 
-                    opt.ClaimActions.MapUniqueJsonKey("country","country");
-                    opt.ClaimActions.MapUniqueJsonKey("city","city");
+                    opt.ClaimActions.MapUniqueJsonKey("country", "country");
+                    opt.ClaimActions.MapUniqueJsonKey("city", "city");
+                    opt.ClaimActions.MapUniqueJsonKey("role", "role");
+
+                    opt.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        RoleClaimType = "role"
+                    };
                 });
 
             services.AddControllersWithViews();
