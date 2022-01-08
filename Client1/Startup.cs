@@ -30,7 +30,10 @@ namespace Client1
                 opt.DefaultScheme = "Cookies";
                 opt.DefaultChallengeScheme = "oidc";
             })
-                .AddCookie("Cookies")
+                .AddCookie("Cookies", opt =>
+                {
+                    opt.AccessDeniedPath = "/Home/AccessDenied";
+                })
                 .AddOpenIdConnect("oidc", opt =>
                 {
                     opt.SignInScheme = "Cookies";
