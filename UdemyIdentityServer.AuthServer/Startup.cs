@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using UdemyIdentityServer.AuthServer.Models;
 
 namespace UdemyIdentityServer.AuthServer
 {
@@ -23,6 +25,11 @@ namespace UdemyIdentityServer.AuthServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CustomDbContext>(opt =>
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("LocalDb"));
+            });
+
             services.AddIdentityServer()
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryApiScopes(Config.GetApiScopes())
