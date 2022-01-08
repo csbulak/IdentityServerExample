@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Client2
 {
@@ -23,6 +20,40 @@ namespace Client2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddAuthentication(opt =>
+                {
+                    opt.DefaultScheme = "Cookies";
+                    opt.DefaultChallengeScheme = "oidc";
+                })
+                .AddCookie("Cookies", opt =>
+                {
+                    opt.AccessDeniedPath = "/Home/AccessDenied";
+                })
+                .AddOpenIdConnect("oidc", opt =>
+                {
+                    opt.SignInScheme = "Cookies";
+                    opt.Authority = "https://localhost:5001";
+                    opt.ClientId = "Client2-Mvc";
+                    opt.ClientSecret = "secret";
+                    opt.ResponseType = "code id_token";
+                    opt.GetClaimsFromUserInfoEndpoint = true; // UserInfo Claims
+                    opt.SaveTokens = true; //Tokenlarý alýr.
+                    opt.Scope.Add("api1.read");
+                    opt.Scope.Add("offline_access");
+                    opt.Scope.Add("CountryAndCity");
+                    opt.Scope.Add("Roles");
+
+                    opt.ClaimActions.MapUniqueJsonKey("country", "country");
+                    opt.ClaimActions.MapUniqueJsonKey("city", "city");
+                    opt.ClaimActions.MapUniqueJsonKey("role", "role");
+
+                    opt.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        RoleClaimType = "role"
+                    };
+                });
+
             services.AddControllersWithViews();
         }
 
@@ -43,7 +74,7 @@ namespace Client2
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
