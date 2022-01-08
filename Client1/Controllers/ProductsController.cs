@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Client1.Models;
+using Client1.Services;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -19,21 +20,17 @@ namespace Client1.Controllers
     public class ProductsController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly IApiResource _apiResource;
 
-        public ProductsController(IConfiguration configuration)
+        public ProductsController(IConfiguration configuration, IApiResource apiResource)
         {
             _configuration = configuration;
+            _apiResource = apiResource;
         }
 
         public async Task<IActionResult> Index()
         {
-            HttpClient client = new HttpClient();
-
-            var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
-
-            client.SetBearerToken(accessToken);
-
-            var response = await client.GetAsync("https://localhost:5016/api/Products/GetProducts");
+            var response = await _apiResource.GetHttpClient().Result.GetAsync("https://localhost:5016/api/Products/GetProducts");
 
             if (response.IsSuccessStatusCode)
             {
