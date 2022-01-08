@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UdemyIdentityServer.AuthServer.Models;
+using UdemyIdentityServer.AuthServer.Repository;
 
 namespace UdemyIdentityServer.AuthServer
 {
@@ -29,6 +30,8 @@ namespace UdemyIdentityServer.AuthServer
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("LocalDb"));
             });
+
+            services.AddScoped<ICustomUserRepository, CustomUserRepository>();
 
             services.AddIdentityServer()
                 .AddInMemoryApiResources(Config.GetApiResources())
