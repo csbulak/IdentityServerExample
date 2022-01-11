@@ -50,8 +50,8 @@ namespace Client1.Controllers
 
             var token = await httpClient.RequestRefreshTokenAsync(new RefreshTokenRequest
             {
-                ClientId = _configuration["Client2:ClientId"],
-                ClientSecret = _configuration["Client2:ClientSecret"],
+                ClientId = _configuration["Client1-ResourceOwner:ClientId"],
+                ClientSecret = _configuration["Client1-ResourceOwner:ClientSecret"],
                 RefreshToken = refreshToken,
                 Address = discovery.TokenEndpoint,
 
