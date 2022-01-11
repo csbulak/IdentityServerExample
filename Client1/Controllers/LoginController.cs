@@ -66,7 +66,7 @@ namespace Client1.Controllers
 
             }
 
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(userInfo.Claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(userInfo.Claims, CookieAuthenticationDefaults.AuthenticationScheme, "name", "role");
 
             ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
@@ -74,11 +74,6 @@ namespace Client1.Controllers
 
             authenticationProperties.StoreTokens(new List<AuthenticationToken>()
             {
-                new AuthenticationToken()
-                {
-                    Name = OpenIdConnectParameterNames.IdToken,
-                    Value = token.IdentityToken
-                },
                 new AuthenticationToken()
                 {
                     Name = OpenIdConnectParameterNames.AccessToken,
@@ -97,7 +92,7 @@ namespace Client1.Controllers
             });
 
 
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authenticationProperties);
 
             return RedirectToAction("Index", "User");
         }
