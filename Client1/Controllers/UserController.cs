@@ -28,10 +28,12 @@ namespace Client1.Controllers
             return View();
         }
 
-        public async Task LogOut()
+        public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync("Cookies");
-            await HttpContext.SignOutAsync("oidc");
+
+            return RedirectToAction("Index", "Home");
+            //await HttpContext.SignOutAsync("oidc");
         }
 
         public async Task<IActionResult> GetRefreshToken()
@@ -52,7 +54,7 @@ namespace Client1.Controllers
                 ClientSecret = _configuration["Client2:ClientSecret"],
                 RefreshToken = refreshToken,
                 Address = discovery.TokenEndpoint,
-                
+
             });
 
             if (token.IsError)
@@ -95,7 +97,7 @@ namespace Client1.Controllers
 
             return RedirectToAction("Index");
         }
-        
+
         [Authorize(Roles = "admin")]
         public IActionResult AdminAction()
         {

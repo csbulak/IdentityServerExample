@@ -30,39 +30,40 @@ namespace Client1
             services.AddScoped<IApiResource, ApiResource>();
 
             services.AddAuthentication(opt =>
-            {
-                opt.DefaultScheme = "Cookies";
-                opt.DefaultChallengeScheme = "oidc";
-            })
+                {
+                    opt.DefaultScheme = "Cookies";
+                    //opt.DefaultChallengeScheme = "oidc";
+                })
                 .AddCookie("Cookies", opt =>
                 {
+                    opt.LoginPath = "/Login/Index";
                     opt.AccessDeniedPath = "/Home/AccessDenied";
-                })
-                .AddOpenIdConnect("oidc", opt =>
-                {
-                    opt.SignInScheme = "Cookies";
-                    opt.Authority = "https://localhost:5001";
-                    opt.ClientId = "Client1-Mvc";
-                    opt.ClientSecret = "secret";
-                    opt.ResponseType = "code id_token";
-                    opt.GetClaimsFromUserInfoEndpoint = true; // UserInfo Claims
-                    opt.SaveTokens = true; //Tokenlarý alýr.
-                    opt.Scope.Add("api1.read");
-                    opt.Scope.Add("offline_access");
-                    opt.Scope.Add("CountryAndCity");
-                    opt.Scope.Add("Roles");
-                    opt.Scope.Add("email");
-
-                    opt.ClaimActions.MapUniqueJsonKey("country", "country");
-                    opt.ClaimActions.MapUniqueJsonKey("city", "city");
-                    opt.ClaimActions.MapUniqueJsonKey("role", "role");
-
-                    opt.TokenValidationParameters = new TokenValidationParameters()
-                    {
-                        RoleClaimType = "role",
-                        NameClaimType = "name"
-                    };
                 });
+            //.AddOpenIdConnect("oidc", opt =>
+            //{
+            //    opt.SignInScheme = "Cookies";
+            //    opt.Authority = "https://localhost:5001";
+            //    opt.ClientId = "Client1-Mvc";
+            //    opt.ClientSecret = "secret";
+            //    opt.ResponseType = "code id_token";
+            //    opt.GetClaimsFromUserInfoEndpoint = true; // UserInfo Claims
+            //    opt.SaveTokens = true; //Tokenlarý alýr.
+            //    opt.Scope.Add("api1.read");
+            //    opt.Scope.Add("offline_access");
+            //    opt.Scope.Add("CountryAndCity");
+            //    opt.Scope.Add("Roles");
+            //    opt.Scope.Add("email");
+
+            //    opt.ClaimActions.MapUniqueJsonKey("country", "country");
+            //    opt.ClaimActions.MapUniqueJsonKey("city", "city");
+            //    opt.ClaimActions.MapUniqueJsonKey("role", "role");
+
+            //    opt.TokenValidationParameters = new TokenValidationParameters()
+            //    {
+            //        RoleClaimType = "role",
+            //        NameClaimType = "name"
+            //    };
+            //});
 
             services.AddControllersWithViews();
         }

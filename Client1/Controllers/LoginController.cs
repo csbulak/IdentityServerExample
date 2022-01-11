@@ -38,6 +38,8 @@ namespace Client1.Controllers
 
             if (disco.IsError)
             {
+                ModelState.AddModelError("", "Email veya şifreniz yanlış.");
+                return View();
                 // Hata ve Loglama 
             }
 
@@ -52,7 +54,8 @@ namespace Client1.Controllers
 
             if (token.IsError)
             {
-
+                ModelState.AddModelError("", "Email veya şifreniz yanlış.");
+                return View();
             }
 
             var userInfo = await client.GetUserInfoAsync(new UserInfoRequest()
