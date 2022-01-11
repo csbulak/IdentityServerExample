@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UdemyIdentityServer.AuthServer.Models;
@@ -34,7 +35,19 @@ namespace UdemyIdentityServer.AuthServer
 
             services.AddScoped<ICustomUserRepository, CustomUserRepository>();
 
+            var assemblyName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
             services.AddIdentityServer()
+                .AddConfigurationStore(opt =>
+                {
+                    opt.ConfigureDbContext = c => c.UseSqlServer(Configuration.GetConnectionString("LocalDb"),
+                        sqlOpt => sqlOpt.MigrationsAssembly(assemblyName));
+                })
+                .AddOperationalStore(opt =>
+                {
+                    opt.ConfigureDbContext = c => c.UseSqlServer(Configuration.GetConnectionString("LocalDb"),
+                        sqlOpt => sqlOpt.MigrationsAssembly(assemblyName));
+                })
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryApiScopes(Config.GetApiScopes())
                 .AddInMemoryClients(Config.GetClients())
