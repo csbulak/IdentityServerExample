@@ -48,10 +48,10 @@ namespace UdemyIdentityServer.AuthServer
                     opt.ConfigureDbContext = c => c.UseSqlServer(Configuration.GetConnectionString("LocalDb"),
                         sqlOpt => sqlOpt.MigrationsAssembly(assemblyName));
                 })
-                .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryApiScopes(Config.GetApiScopes())
-                .AddInMemoryClients(Config.GetClients())
-                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                //.AddInMemoryApiResources(Config.GetApiResources())
+                //.AddInMemoryApiScopes(Config.GetApiScopes())
+                //.AddInMemoryClients(Config.GetClients())
+                //.AddInMemoryIdentityResources(Config.GetIdentityResources())
                 //.AddTestUsers(Config.GetUsers().ToList())
                 .AddDeveloperSigningCredential()
                 .AddProfileService<CustomProfileServices>()
