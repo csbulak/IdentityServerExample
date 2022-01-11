@@ -3,20 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyIdentityServer.AuthServer", "UdemyIdentityServer.AuthServer\UdemyIdentityServer.AuthServer.csproj", "{EF594DFC-BB1C-427E-823C-709097C7ED12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyIdentityServer.AuthServer", "UdemyIdentityServer.AuthServer\UdemyIdentityServer.AuthServer.csproj", "{EF594DFC-BB1C-427E-823C-709097C7ED12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client1", "Client1\Client1.csproj", "{1551DD96-39CD-431A-AA9B-169C39AA9ACD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client1", "Client1\Client1.csproj", "{1551DD96-39CD-431A-AA9B-169C39AA9ACD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client2", "Client2\Client2.csproj", "{F8669E22-7E8D-4C28-A8D4-C3FF4965D72E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client2", "Client2\Client2.csproj", "{F8669E22-7E8D-4C28-A8D4-C3FF4965D72E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API1", "API1\API1.csproj", "{FD1C1EA1-7449-417B-A4FD-E14628D4C66E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API1", "API1\API1.csproj", "{FD1C1EA1-7449-417B-A4FD-E14628D4C66E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API2", "API2\API2.csproj", "{5F1503D2-A665-4692-ABA9-E03791FCB34C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API2", "API2\API2.csproj", "{5F1503D2-A665-4692-ABA9-E03791FCB34C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9896BA8-4479-4B28-B1B1-0A453F979E0D}"
 	ProjectSection(SolutionItems) = preProject
 		Ports.txt = Ports.txt
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityAPI.AuthServer", "IdentityAPI.AuthServer\IdentityAPI.AuthServer.csproj", "{CFF1D3D3-DCAC-4477-9F3D-33D43BBB96A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{5F1503D2-A665-4692-ABA9-E03791FCB34C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F1503D2-A665-4692-ABA9-E03791FCB34C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F1503D2-A665-4692-ABA9-E03791FCB34C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF1D3D3-DCAC-4477-9F3D-33D43BBB96A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF1D3D3-DCAC-4477-9F3D-33D43BBB96A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF1D3D3-DCAC-4477-9F3D-33D43BBB96A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF1D3D3-DCAC-4477-9F3D-33D43BBB96A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
